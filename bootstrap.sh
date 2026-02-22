@@ -72,7 +72,7 @@ if ask "Clone and stow dotfiles?"; then
   git clone https://github.com/HappyNZ95/dotfiles.git ~/dotfiles
   cd ~/dotfiles
   for pkg in */; do
-    stow "$pkg"
+    stow --adopt "$pkg"
   done
 fi
 #Log in to github
