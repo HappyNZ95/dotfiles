@@ -34,8 +34,9 @@ if ask "Install browsers?"; then
   paru -S --noconfirm --needed python-pywalfox
 fi
 # Google Chrome
-if ask "Install Google Chrome?"; then
+if ask "Install work apps?"; then
   paru -S --noconfirm --needed google-chrome
+  ./installConsole-arch.sh
 fi
 
 # dev tools
