@@ -34,11 +34,6 @@ if ask "Install browsers?"; then
   sudo pacman -S --noconfirm --needed librewolf zen-browser-bin
   paru -S --noconfirm --needed python-pywalfox
 fi
-# Google Chrome
-if ask "Install work apps?"; then
-  paru -S --noconfirm --needed google-chrome
-  ./installConsole-arch.sh
-fi
 
 # dev tools
 if ask "Install developer tools?"; then
@@ -85,6 +80,11 @@ if ask "login to GitHub?"; then
   gh auth login
 fi
 
+# Google Chrome
+if ask "Install work apps?"; then
+  paru -S --noconfirm --needed google-chrome
+  ./installConsole-arch.sh
+fi
 echo "Setup finished!"
 if ask "Restart computer?"; then
   reboot
