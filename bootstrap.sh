@@ -69,12 +69,31 @@ fi
 
 # dotfiles
 if ask "Clone and stow dotfiles?"; then
-  git clone https://github.com/HappyNZ95/dotfiles.git ~/dotfiles
-  cd ~/dotfiles
+  DOTFILES_DIR=~/dotfiles
+
+  # clone if missing, otherwise pull latest
+  if [ ! -d "$DOTFILES_DIR/.git" ]; then
+    git clone https://github.com/HappyNZ95/dotfiles.git "$DOTFILES_DIR"
+  else
+    cd "$DOTFILES_DIR"
+    git pull
+  fi
+
+  cd "$DOTFILES_DIR"
+
+  # stow all packages
   for pkg in */; do
-    stow --adopt "$pkg"
+    # remove any existing target directories before stowing
+    TARGET_DIR="$HOME/.config/${pkg%/}"
+    if [ -d "$TARGET_DIR" ] || [ -f "$TARGET_DIR" ]; then
+      echo "Removing existing $TARGET_DIR..."
+      rm -rf "$TARGET_DIR"
+    fi
+
+    stow "$pkg"
   done
 fi
+
 #Log in to github
 if ask "login to GitHub?"; then
   gh auth login
