@@ -26,6 +26,7 @@ if ask "Mount HDD at /mnt/hdd?"; then
   sudo mkdir -p /mnt/hdd
   if ! mountpoint -q /mnt/hdd; then
     sudo mount /dev/sda1 /mnt/hdd
+    echo 'UUID=be3712c8-f3a7-493c-800b-7766a3f05716 /mnt/hdd ext4 defaults,noatime 0 2' | sudo tee -a /etc/fstab
   fi
 fi
 
