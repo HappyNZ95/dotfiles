@@ -15,7 +15,7 @@ ask() {
 
 # desktop environment
 if ask "Install desktop environment and themes?"; then
-  sudo pacman -S --noconfirm --needed wl-clipboard hyprland sddm
+  sudo pacman -S --noconfirm --needed wl-clipboard hyprland hyprshot
   paru -S noctalia-shell-git
   paru -S --noconfirm --needed qt6ct adw-gtk-theme nwg-look nemo
   gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
