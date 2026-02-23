@@ -47,7 +47,7 @@ fi
 
 # misc apps
 if ask "Install miscellaneous apps?"; then
-  sudo pacman -S --noconfirm --needed localsend yazi obsidian
+  sudo pacman -S --noconfirm --needed localsend yazi obsidian ark
   sudo ufw allow 53317/tcp
   sudo ufw allow 53317/udp
 fi
@@ -102,6 +102,7 @@ fi
 # Google Chrome
 if ask "Install work apps?"; then
   paru -S --noconfirm --needed google-chrome
+  sudo pacman -S wine-mono
   ./installConsole-arch.sh
 fi
 echo "Setup finished!"
