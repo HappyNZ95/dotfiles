@@ -16,7 +16,6 @@ ask() {
 # desktop environment
 if ask "Install desktop environment and themes?"; then
   sudo pacman -S --noconfirm --needed wl-clipboard hyprland hyprshot
-  paru -S noctalia-shell-git
   paru -S --noconfirm --needed qt6ct adw-gtk-theme nwg-look nemo
   gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
 fi
@@ -32,9 +31,11 @@ if ask "Mount HDD at /mnt/hdd?"; then
   ./helpers/create-hdd-fileshare.sh
   sudo systemctl enable --now smb
 fi
-sudo pacman -S --noconfirm --needed cifs-utils
-mkdir -p ~/hdd
-sudo mount -t cifs //desktop/hdd ~/hdd -o guest,vers=3.0
+if ask "Mount hdd smb file share?"; then
+  sudo pacman -S --noconfirm --needed cifs-utils
+  mkdir -p /mnt/hdd
+  ./helpers/mount-hdd-smb.sh
+fi
 
 # browser
 if ask "Install browsers?"; then
