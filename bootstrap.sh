@@ -28,7 +28,13 @@ if ask "Mount HDD at /mnt/hdd?"; then
     sudo mount /dev/sda1 /mnt/hdd
     echo 'UUID=be3712c8-f3a7-493c-800b-7766a3f05716 /mnt/hdd ext4 defaults,noatime 0 2' | sudo tee -a /etc/fstab
   fi
+  sudo pacman -S --noconfirm --needed samba
+  ./helpers/create-hdd-fileshare.sh
+  sudo systemctl enable --now smb
 fi
+sudo pacman -S --noconfirm --needed cifs-utils
+mkdir -p ~/hdd
+sudo mount -t cifs //desktop/hdd ~/hdd -o guest,vers=3.0
 
 # browser
 if ask "Install browsers?"; then
