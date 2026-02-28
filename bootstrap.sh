@@ -38,7 +38,8 @@ fi
 
 # dev tools
 if ask "Install developer tools?"; then
-  sudo pacman -S --noconfirm --needed github-cli lazygit lazydocker tree stow
+  sudo pacman -S --noconfirm --needed github-cli lazygit lazydocker tree stow lxc lxd fzf
+  ./helpers/setup-zoxide-fish.sh
 fi
 
 # neovim
@@ -49,6 +50,7 @@ fi
 # misc apps
 if ask "Install miscellaneous apps?"; then
   sudo pacman -S --noconfirm --needed localsend yazi obsidian ark
+  paru -S --noconfirm --needed fff
   sudo ufw allow 53317/tcp
   sudo ufw allow 53317/udp
 fi
@@ -98,6 +100,10 @@ fi
 #Log in to github
 if ask "login to GitHub?"; then
   gh auth login
+fi
+
+if ask "Install tailscale"; then
+  curl -fsSL https://tailscale.com/install.sh | sh
 fi
 
 # Google Chrome
